@@ -10,7 +10,7 @@ export default class HomePage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-
+            isHeart: false
         }
     }
 
@@ -30,6 +30,11 @@ export default class HomePage extends React.Component {
 
     onRightButtonClicked = () => {
         this.props.navigator.push('profilePage')
+    };
+    heartPressed = () => {
+        this.setState({
+            isHeart: !this.state.isHeart
+        })
     };
 
     render() {
@@ -51,7 +56,7 @@ export default class HomePage extends React.Component {
                 />
                 <View style={{ position:'absolute', flex:1, top:0, bottom: 0, left: 0, right: 0}}>
 
-                    <TopComponent/>
+                    <TopComponent isLiked={this.state.isHeart} heartPressed={this.heartPressed}/>
 
                     <View style={{ flex:1, justifyContent: 'center'}}>
                         <CenterComponent
