@@ -21,7 +21,7 @@ export default  class TopComponent extends Component {
         return(
             <View style={{ padding: 15, flexDirection:'row' }}>
                 <View style={{ flex:1 }}>
-                    <Image source={require("../../resources/images/prana.png")}
+                    <Image source={require("../../resources/images/logo.png")}
                            style={{height:Constant.screenWidth*0.12, width: Constant.screenWidth*0.3}}
                            resizeMode="stretch"
                     />
