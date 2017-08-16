@@ -12,7 +12,7 @@ export default class UserProfile extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isHeart: false
+            isHeart: false,
         }
     }
     onLeftButtonClicked = () => {
