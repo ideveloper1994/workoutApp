@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import store from './store/config';
 import navigationContext from './navigationHelper/customNavigationContext';
 import Router from './navigationHelper/router'
-import { NavigationProvider,StackNavigation } from '@expo/ex-navigation';
+import { NavigationProvider,StackNavigation,NavigationStyles } from '@expo/ex-navigation';
+import Constant from './helper/constant';
 
 export default class main extends React.Component {
-
     render() {
         return (
             <View style={styles.container}>
@@ -20,7 +20,19 @@ export default class main extends React.Component {
                                          defaultRouteConfig={{
                                              navigationBar: {
                                                  visible: false,
-                                             }
+                                             },
+                                             styles: {
+                                                 ...NavigationStyles.SlideHorizontal,
+                                                 gestures: (params) => {
+                                                     const newParams = { ...params };
+                                                     newParams.gestureResponseDistance = Constant.screenWidth;
+                                                     return NavigationStyles.SlideHorizontal.gestures(newParams);
+                                                 },
+                                                 style:{
+                                                     opacity:0.8,
+                                                 }
+                                             },
+
                                          }}/>
                     </NavigationProvider>
                 </Provider>

@@ -19,7 +19,7 @@ export default  class TopComponent extends Component {
 
     render() {
         return(
-            <View style={{ padding: 15, flexDirection:'row' }}>
+            <View style={{ padding: 15, flexDirection:'row'}}>
                 <View style={{ flex:1 }}>
                     <Image source={require("../../resources/images/logo.png")}
                            style={{height:Constant.screenWidth*0.12, width: Constant.screenWidth*0.3}}
@@ -29,25 +29,30 @@ export default  class TopComponent extends Component {
                 <View style={{ flex:1,
                 flexDirection:'row',
                 justifyContent: 'space-around',
-                alignItems: 'center' }}>
+                alignItems: 'center' ,
+                backgroundColor: Constant.transparent}}>
                     <Text style={styles.text}>SHARE</Text>
                     <View style={{ backgroundColor: 'rgba(0,0,0,0.3)',
                     height: 30, width: 30,
                      borderRadius: 15,
                     justifyContent: 'center',
-                    alignItems: 'center'  }}>
+                    alignItems: 'center',
+                    }}>
                         <Entypo name='share'
                                 size={20}
-                                color="#FFF"/>
+                                color="#FFF"
+                        style={{backgroundColor: Constant.transparent}}/>
                     </View>
 
                     <FontAwesome name='heart'
                                  size={20}
-                                 color="#FFF"/>
+                                 color="#FFF"
+                                 style={{backgroundColor: Constant.transparent}}/>
 
                     <MaterialCommunityIcons name='window-close'
                                             size={25}
-                                            color="#FFF"/>
+                                            color="#FFF"
+                                            style={{backgroundColor: Constant.transparent}}/>
 
                 </View>
             </View>
@@ -59,7 +64,8 @@ const styles = StyleSheet.create({
     text:{
         color: '#FFF',
         fontSize: FontConstant.XSMALL,
-        fontWeight: '600'
+        fontWeight: '600',
+        backgroundColor: Constant.transparent
     }
 
 });

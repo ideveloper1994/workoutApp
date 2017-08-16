@@ -24,6 +24,7 @@ export default  class BottomComponent extends Component {
                     alignItems: 'flex-start',
                     }}>
                     <View style={{
+
                     borderRadius: 15,
                     borderColor: '#FFF', borderWidth: 1, padding:5, paddingLeft:10, paddingRight: 10 }}>
                         <Text style={styles.text}>LEARN MORE</Text>
@@ -35,7 +36,8 @@ export default  class BottomComponent extends Component {
                 alignItems: 'flex-end' }}>
                     <MaterialCommunityIcons name='message-reply-text'
                                             size={22}
-                                            color="#FFF"/>
+                                            color="#FFF"
+                                            style={{backgroundColor: Constant.transparent}}/>
 
                 </View>
             </View>
@@ -47,7 +49,8 @@ const styles = StyleSheet.create({
     text:{
         color: '#FFF',
         fontSize: FontConstant.SMALL,
-        fontWeight: '500'
+        fontWeight: '500',
+        backgroundColor: Constant.transparent
     }
 
 });

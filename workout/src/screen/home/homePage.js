@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, FlatList, Image } from 'react-native';
-import Constant from '../../helper/constant';
-import FontSize from '../../helper/fontSize';
 import TopComponent from '../components/topComponent';
 import BottomComponent from '../components/bottomComponent';
 import CenterComponent from '../components/centerComponent';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class HomePage extends React.Component {
 
@@ -20,18 +19,32 @@ export default class HomePage extends React.Component {
 
     componentDidMount(){
     }
+    onSwipeLeft(gestureState) {
+        this.props.navigator.push('profilePage')
+    }
+
 
     onCenterBtnClicked = () => {
 
     };
 
     onRightButtonClicked = () => {
-
+        this.props.navigator.push('profilePage')
     };
 
     render() {
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+        };
+
         return (
             <View style={styles.container}>
+                <GestureRecognizer
+                    onSwipeLeft={(state) => this.onSwipeLeft(state)}
+                    config={config}
+                    style={{flex: 1}}
+                >
                 <Image source={require("../../resources/images/home.png")}
                        style={{flex:1}}
                        resizeMode="cover"
@@ -55,7 +68,7 @@ export default class HomePage extends React.Component {
                         <BottomComponent/>
                     </View>
                 </View>
-
+</GestureRecognizer>
             </View>
         );
     }
