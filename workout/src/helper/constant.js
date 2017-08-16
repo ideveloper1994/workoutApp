@@ -12,4 +12,5 @@ module.exports = {
     isIOS: Platform.OS === 'ios',
     isANDROID: Platform.OS === 'android',
 
+    transparent: 'transparent',
 };
