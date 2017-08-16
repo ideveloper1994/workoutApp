@@ -13,6 +13,9 @@ export default class main extends React.Component {
             <View style={styles.container}>
                 <Provider store={store}>
                     <NavigationProvider router={Router} context={navigationContext}>
+                        <StatusBar
+                            hidden={true}
+                        />
                         <StackNavigation initialRoute={Router.getRoute('homePage')}
                                          defaultRouteConfig={{
                                              navigationBar: {

@@ -1,7 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+import Constant from '../../helper/constant';
+import FontSize from '../../helper/fontSize';
+import TopComponent from '../components/topComponent';
 
 export default class HomePage extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+
+        }
+    }
+
+    componentWillMount(){
+    }
 
     componentDidMount(){
     }
@@ -9,7 +22,7 @@ export default class HomePage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>hgfhfghfhgfh</Text>
+                <TopComponent/>
             </View>
         );
     }
@@ -18,13 +31,6 @@ export default class HomePage extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
-        paddingTop: 25
+        backgroundColor: '#F00',
     },
-    rowCell: {
-        width: '100%',
-    },
-    rowCellNameText: {
-        padding: 10,
-    }
 });
