@@ -12,7 +12,7 @@ export default class UserProfile extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-
+            isHeart: false
         }
     }
     onLeftButtonClicked = () => {
@@ -23,6 +23,12 @@ export default class UserProfile extends React.Component {
     onRightButtonClicked = () => {
 
     };
+    heartPressed = () => {
+        this.setState({
+            isHeart: !this.state.isHeart
+        })
+    };
+
 
     render() {
         return (
@@ -32,7 +38,7 @@ export default class UserProfile extends React.Component {
 
                 <View style={styles.mainView}>
                     <View style={{justifyContent:'flex-start', flex:1}}>
-                    <TopComponent/>
+                        <TopComponent isLiked={this.state.isHeart} heartPressed={this.heartPressed}/>
                     </View>
                     <CenterComponent
                         isLeft={true}

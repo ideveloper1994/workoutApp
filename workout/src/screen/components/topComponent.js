@@ -46,8 +46,9 @@ export default  class TopComponent extends Component {
 
                     <FontAwesome name='heart'
                                  size={20}
-                                 color="#FFF"
-                                 style={{backgroundColor: Constant.transparent}}/>
+                                 color={(this.props.isLiked) ? "#FF0000" : "#FFF"}
+                                 style={{backgroundColor: Constant.transparent}}
+                                 onPress={() => this.props.heartPressed()}/>
 
                     <MaterialCommunityIcons name='window-close'
                                             size={25}
