@@ -2,18 +2,48 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import FontConstant from '../../helper/fontSize';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import TopComponent from '../components/topComponent';
+import BottomComponent from '../components/bottomComponent';
+import CenterComponent from '../components/centerComponent';
+
 
 export default class UserProfile extends React.Component {
 
-    componentDidMount(){
+    constructor(props){
+        super(props);
+        this.state = {
+
+        }
     }
+    onLeftButtonClicked = () => {
+
+        this.props.navigator.pop()
+    };
+
+    onRightButtonClicked = () => {
+
+    };
 
     render() {
         return (
             <View style={styles.container}>
-                <Image style={{height: null,width:null,flex: 1}} source={require('./../../resources/images/swift.jpeg')}
+                <Image style={{height: null,width:null,flex: 1}} source={require('./../../resources/images/profile.png')}
                        resizeMode='cover'/>
+
                 <View style={styles.mainView}>
+                    <View style={{justifyContent:'flex-start', flex:1}}>
+                    <TopComponent/>
+                    </View>
+                    <CenterComponent
+                        isLeft={true}
+                        leftTitle = "VIDEO"
+                        isCenter = {false}
+                        isRight={true}
+                        rightTitle = "TIPS"
+                        onRightButtonClicked = {this.onRightButtonClicked}
+                        onLeftButtonClicked = {this.onLeftButtonClicked}
+                    />
+
                     <View style={styles.profileView}>
                         <Text style={styles.bioText}>BIO</Text>
                         <Text style={styles.nameText}>Jennifer Kruidbos</Text>
@@ -23,6 +53,8 @@ export default class UserProfile extends React.Component {
                     <View style={styles.downArrowView}>
                         <EvilIcons name='chevron-down' size={40} style={styles.downArrow}/>
                     </View>
+                    <BottomComponent/>
+
                 </View>
             </View>
         );
