@@ -23,11 +23,11 @@ export default class HomePage extends React.Component {
             rate: 1,
             volume: 1,
             muted: false,
-            resizeMode: 'contain',
+            resizeMode: 'cover',
             duration: 0.0,
             currentTime: 0.0,
             controls: false,
-            paused: false,
+            paused: true,
             skin: 'custom',
             ignoreSilentSwitch: null,
             isBuffering: false,
@@ -50,9 +50,9 @@ export default class HomePage extends React.Component {
 
 
     onCenterBtnClicked = () => {
-            this.setState({
-                isFullScreen: false
-            });
+        this.setState({
+            paused: !this.state.paused
+        });
     };
 
     onRightButtonClicked = () => {
@@ -100,7 +100,7 @@ export default class HomePage extends React.Component {
         const flexRemaining = (1 - this.getCurrentTimePercentage()) * 100;
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.fullScreen} onPress={() => {this.setState({paused: !this.state.paused, isFullScreen: true})}}>
+                <TouchableHighlight style={styles.fullScreen} onPress={() => {this.setState({paused: !this.state.paused})}}>
                     <Video
                         source={require("../../resources/demo.mp4")}
                         style={styles.fullScreen}
@@ -116,7 +116,7 @@ export default class HomePage extends React.Component {
                         onEnd={() => this.onCompleteVideo() }
                         repeat={true}
                     />
-                </TouchableOpacity>
+                </TouchableHighlight>
 
                 {
                     (!this.state.isLoad)  ?
@@ -139,25 +139,50 @@ export default class HomePage extends React.Component {
         );
     }
 
+    onVideoTap = () => {
+        if(!this.state.paused){
+            this.setState({paused: !this.state.paused});
+        }
+    };
+
     render() {
+        const flexCompleted = this.getCurrentTimePercentage() * 100;
+        const flexRemaining = (1 - this.getCurrentTimePercentage()) * 100;
+
         const config = {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
         };
-        if(this.state.isFullScreen){
-            return (
+        return (
 
-                <View style={styles.container}>
-                    <GestureRecognizer
-                        onSwipeLeft={(state) => this.onSwipeLeft(state)}
-                        config={config}
-                        style={{flex: 1}}
-                    >
-                        <Image source={require("../../resources/images/home.png")}
-                               style={{flex:1,height:null, width:null}}
-                               resizeMode="cover"
+            <View style={styles.container}>
+
+                <GestureRecognizer
+                    onSwipeLeft={(state) => this.onSwipeLeft(state)}
+                    config={config}
+                    style={{flex: 1}}
+                >
+                    <TouchableHighlight style={[styles.fullScreen, {backgroundColor: Constant.transparent}]}
+                                        onPress={() => this.onVideoTap()}
+                                        underlayColor={Constant.transparent}>
+                        <View style={{flex:1, backgroundColor: '#000'}}>
+                        <Video
+                            source={require("../../resources/demo.mp4")}
+                            style={styles.fullScreen}
+                            rate={this.state.rate}
+                            paused={this.state.paused}
+                            volume={this.state.volume}
+                            muted={this.state.muted}
+                            ignoreSilentSwitch={this.state.ignoreSilentSwitch}
+                            resizeMode={this.state.resizeMode}
+                            onLoad={this.onLoad}
+                            onBuffer={this.onBuffer}
+                            onProgress={this.onProgress}
+                            onEnd={() => this.onCompleteVideo() }
+                            repeat={true}
                         />
-                        <View style={{ position:'absolute', flex:1, top:0, bottom: 0, left: 0, right: 0}}>
+
+                        <View style={{ position:'absolute', flex:1, top:0, bottom: 0, left: 0, right: 0, backgroundColor: Constant.transparent}}>
 
                             <TopComponent isLiked={this.state.isHeart} heartPressed={this.heartPressed}/>
 
@@ -165,30 +190,30 @@ export default class HomePage extends React.Component {
                                 <CenterComponent
                                     isLeft={false}
                                     leftTitle = ""
-                                    isCenter = {true}
+                                    isCenter = {this.state.paused}
                                     onCenterBtnClicked = {this.onCenterBtnClicked}
                                     isRight={true}
                                     rightTitle = "PROFILE"
-                                    onRightButtonClicked = {this.onRightButtonClicked}
-                                />
+                                    onRightButtonClicked = {this.onRightButtonClicked} />
                             </View>
                             <View style={{ justifyContent: 'flex-end'}}>
                                 <BottomComponent/>
                             </View>
                         </View>
-                    </GestureRecognizer>
-                </View>
-            );
-        }else{
-            return  this.renderCustomSkin();
-        }
+                        </View>
+
+                    </TouchableHighlight>
+                </GestureRecognizer>
+            </View>
+        );
+
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
+        backgroundColor: '#000',
     },
     fullScreen: {
         position: 'absolute',
@@ -196,6 +221,7 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
+        backgroundColor: "black",
     },
     controls: {
         backgroundColor: "transparent",
